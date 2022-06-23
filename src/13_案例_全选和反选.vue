@@ -1,12 +1,12 @@
 <template>
   <div>
-    nothing
+    
   </div>
 </template>
 
 <script>
 export default {
-  name: 'VuecliDemoApp',
+  name: 'VuecliDemo13',
 
   data() {
     return {
@@ -24,6 +24,6 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>
