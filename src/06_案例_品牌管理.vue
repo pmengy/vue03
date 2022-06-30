@@ -61,7 +61,7 @@
               type="number"
               class="form-control"
               placeholder="价格"
-              v-model.trim.number="price"
+              v-model.trim="price"
             />
           </div>
         </div>
@@ -93,6 +93,12 @@ export default {
     };
   },
   methods: {
+    del(id) {
+      const index = this.list.findIndex((ele) => {
+        return id === ele.id;
+      });
+      this.list.splice(index, 1);
+    },
     add() {
       if (this.name.length === 0 || this.price === 0 || this.price === '')
         return alert('Please enter a name and price');
@@ -107,12 +113,6 @@ export default {
       });
       this.name = '';
       this.price = 0;
-    },
-    del(id) {
-      const index = this.list.findIndex((ele) => {
-        return id === ele.id;
-      });
-      this.list.splice(index, 1);
     },
   },
 };
