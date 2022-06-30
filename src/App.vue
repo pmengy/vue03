@@ -1,125 +1,71 @@
 <template>
-  <div id="app">
-    <div class="container">
-      <!-- 顶部框模块 -->
-      <div class="form-group">
-        <div class="input-group">
-          <h4>品牌管理</h4>
-        </div>
-      </div>
-
-      <!-- 数据表格 -->
-      <table class="table table-bordered table-hover mt-2">
-        <thead>
-          <tr>
-            <th>编号</th>
-            <th>资产名称</th>
-            <th>价格</th>
-            <th>创建时间</th>
-            <th>操作</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item in list" :key="item.id">
-            <td>{{ item.id }}</td>
-            <td>{{ item.name }}</td>
-            <td :class="{ red: item.price > 100 }">{{ item.price }}</td>
-            <td>{{ item.time }}</td>
-            <td><a href="#" @click.prevent="del(item.id)">删除</a></td>
-          </tr>
-          <!-- <tr style="background-color: #EEE">
-              <td>统计:</td>
-              <td colspan="2">总价钱为: 0</td>
-              <td colspan="2">平均价: 0</td>
-          </tr> -->
-        </tbody>
-        <!-- 
-        <tfoot >
-          <tr>
-            <td colspan="5" style="text-align: center">暂无数据</td>
-          </tr>
-        </tfoot>
-            -->
-      </table>
-
-      <!-- 添加资产 -->
-      <form class="form-inline" style="display: flex">
-        <div class="form-group">
-          <div class="input-group">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="资产名称"
-              v-model.trim="name"
-            />
-          </div>
-        </div>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <div class="form-group">
-          <div class="input-group">
-            <input
-              type="number"
-              class="form-control"
-              placeholder="价格"
-              v-model.trim="price"
-            />
-          </div>
-        </div>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <!-- 阻止表单提交 -->
-        <button class="btn btn-primary" @click.prevent="add">添加资产</button>
-      </form>
-    </div>
+  <div>
+    <p>请选择你要购买的书籍</p>
+    <ul>
+      <li v-for="(item, index) in arr" :key="index">
+        <span>{{ item.name }}</span>
+        <button @click="buy(index)">买书</button>
+      </li>
+    </ul>
+    <table border="1" width="500" cellspacing="0">
+      <tr>
+        <th>序号</th>
+        <th>书名</th>
+        <th>单价</th>
+        <th>数量</th>
+        <th>合计</th>
+      </tr>
+      <tr v-for="(item, index) in arr" :key="index">
+        <td>{{ index + 1 }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.price }}</td>
+        <td>{{ item.count }}</td>
+        <td>{{ item.price * item.count }}</td>
+      </tr>
+    </table>
+    <p>总价格为:{{ total }}</p>
   </div>
 </template>
 
 <script>
-// 1. 明确需求
-// 2. 标签+样式+默认数据
-// 3. 下载bootstrap, main.js引入bootstrap.css
-// 4. 把list数组 - 铺设表格
-// 5. 修改价格颜色
 export default {
   data() {
     return {
-      list: [
-        { id: 100, name: '外套', price: 199, time: new Date('2010-08-12') },
-        { id: 101, name: '裤子', price: 34, time: new Date('2013-09-01') },
-        { id: 102, name: '鞋', price: 25.4, time: new Date('2018-11-22') },
-        { id: 103, name: '头发', price: 19900, time: new Date('2020-12-12') },
+      arr: [
+        {
+          name: '水浒传',
+          price: 107,
+          count: 0,
+        },
+        {
+          name: '西游记',
+          price: 192,
+          count: 0,
+        },
+        {
+          name: '三国演义',
+          price: 219,
+          count: 0,
+        },
+        {
+          name: '红楼梦',
+          price: 178,
+          count: 0,
+        },
       ],
-      name: '',
-      price: 0,
     };
   },
   methods: {
-    del(id) {
-      const index = this.list.findIndex((ele) => {
-        return id === ele.id;
-      });
-      this.list.splice(index, 1);
+    buy(id) {
+      this.arr[id].count++;
     },
-    add() {
-      if (this.name.length === 0 || this.price === 0 || this.price === '')
-        return alert('Please enter a name and price');
-      const id = this.list[this.list.length - 1]
-        ? this.list[this.list.length - 1].id + 1
-        : 100;
-      this.list.push({
-        id,
-        name: this.name,
-        price: this.price,
-        time: new Date(),
-      });
-      this.name = '';
-      this.price = 0;
+  },
+  computed: {
+    total() {
+      return this.arr.reduce((sum, obj) => {
+        return (sum += obj.price * obj.count);
+      }, 0);
     },
   },
 };
 </script>
-
-<style>
-.red {
-  color: red;
-}
-</style>
