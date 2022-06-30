@@ -1,11 +1,11 @@
 <template>
   <div>
     <ul>
-      <li v-for="item in arr" :key="item">{{item}}</li>
+      <li v-for="item in arr" :key="item">{{ item }}</li>
     </ul>
-    <button>数组翻转</button>
-    <button>截取前3个</button>
-    <button>更新第一个元素值</button>
+    <button @click="reverse">数组翻转</button>
+    <button @click="slice">截取前3个</button>
+    <button @click="change">更新第一个元素值</button>
   </div>
 </template>
 
@@ -15,15 +15,23 @@ export default {
 
   data() {
     return {
+      arr: [5, 3, 9, 2, 1],
     };
   },
-  mounted() {
-  },
-  methods: {  
+  mounted() {},
+  methods: {
+    reverse() {
+      this.arr.reverse();
+    },
+    slice() {
+      this.arr = this.arr.slice(0, 3);
+    },
+    change() {
+      // this.$set(this.arr, 0, 10);
+      this.arr.splice(0, 1, 10);
+    },
   },
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

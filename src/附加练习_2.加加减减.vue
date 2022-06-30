@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <ul>
-      <li v-for="(item, ind) in arr" :key="item">
+      <li v-for="(item, index) in arr" :key="item">
         <span>{{ item }}</span>
-        <button @click="del(ind)">删除</button>
+        <button @click="del(index)">删除</button>
       </li>
     </ul>
     <button @click="add">生成</button>

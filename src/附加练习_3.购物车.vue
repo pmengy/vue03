@@ -8,14 +8,14 @@
         <th>操作</th>
       </tr>
       <!-- 循环渲染的元素tr -->
-      <tr v-for="(item,index) in list" :key="item.id">
-            <td>{{item.id}}</td>
-            <td>{{item.name}}</td>
-            <td>{{item.time}}</td>
-            <td>
-                <button @click="del(index)">删除</button>
-            </td>
-        </tr>
+      <tr v-for="item in list" :key="item.id">
+        <td>{{ item.id }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.time }}</td>
+        <td>
+          <button @click="del(item.id)">删除</button>
+        </td>
+      </tr>
       <tr v-if="list.length === 0">
         <td colspan="4">没有数据咯~</td>
       </tr>
@@ -28,15 +28,15 @@ export default {
   data() {
     return {
       list: [
-        { id: 1, name: "奔驰", time: "2020-08-01" },
-        { id: 2, name: "宝马", time: "2020-08-02" },
-        { id: 3, name: "奥迪", time: "2020-08-03" },
+        { id: 1, name: '奔驰', time: '2020-08-01' },
+        { id: 2, name: '宝马', time: '2020-08-02' },
+        { id: 3, name: '奥迪', time: '2020-08-03' },
       ],
     };
   },
   methods: {
-    del(index) {
-      // 删除按钮 - 得到索引, 删除数组里元素
+    del(id) {
+      const index = this.list.indexOf((ele) => ele.id === id);
       this.list.splice(index, 1);
     },
   },
