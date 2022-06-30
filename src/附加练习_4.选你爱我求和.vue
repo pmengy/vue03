@@ -6,10 +6,10 @@
       style="display: inline-block"
       :key="index"
     >
-      <input type="checkbox" v-model="checkNumArr" :value="item" />
+      <input type="checkbox" v-model="checkedNum" :value="item" />
       <span>{{ item }}</span>
     </div>
-    <p>你选中的元素, 累加的值和为: {{ theSum }}</p>
+    <p>你选中的元素, 累加的值和为: {{ total }}</p>
   </div>
 </template>
 
@@ -18,18 +18,16 @@ export default {
   data() {
     return {
       arr: [9, 15, 19, 25, 29, 31, 48, 57, 62, 79, 87],
-      checkNumArr: [], //  保存用户选中的数字
+      checkedNum: [],
     };
   },
+  methods: {},
   computed: {
-    theSum() {
-      return this.checkNumArr.reduce((sum, val) => {
+    total() {
+      return this.checkedNum.reduce((sum, val) => {
         return (sum += val);
       }, 0);
     },
   },
 };
 </script>
-
-<style>
-</style>
