@@ -3,6 +3,7 @@
     <ul>
       <li v-for="(item, index) in arr" :key="item">
         <span>{{ item }}</span>
+
         <button @click="del(index)">删除</button>
       </li>
     </ul>
@@ -14,19 +15,16 @@
 export default {
   data() {
     return {
-      arr: [5, 7, 1],
+      arr: [],
     };
   },
   methods: {
     add() {
       this.arr.push(Math.floor(Math.random() * 20));
     },
-    del(index) {
-      this.arr.splice(index, 1);
+    del(id) {
+      this.arr.splice(id, 1);
     },
   },
 };
 </script>
-
-<style>
-</style>

@@ -36,7 +36,9 @@ export default {
   },
   methods: {
     del(id) {
-      const index = this.list.indexOf((ele) => ele.id === id);
+      const index = this.list.findIndex((ele) => {
+        return id === ele.id;
+      });
       this.list.splice(index, 1);
     },
   },
