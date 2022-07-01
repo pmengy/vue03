@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const obj = {
+        name: 'test',
+        a() {
+          // 最先执行这句话,obj调用了a方法,所以this指向obj对象,所以会直接打印方法a
+          console.log(this.a);
+          setTimeout(function () {
+            // 最后执行这个定时器,因为定时器指向window,但是window上没有a属性,所以会打印undefined
+            console.log(this.a);
+          }, 1000);
+        },
+        b() {
+          // 然后指向这句话,obj调用了b方法,this指向obj对象
+          console.log(this);
+          // 再指向这句话,但是全局都没有fn函数,所以会报错,显示fn未被定义
+          fn();
+        },
+      };
+
+      obj.a();
+      obj.b();
+    </script>
+  </body>
+</html>
