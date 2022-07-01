@@ -6,7 +6,6 @@
 
       实现一个把所有字母转换成大写的过滤器
      -->
-      
   </div>
 </template>
 
@@ -23,9 +22,7 @@ export default {
   // },
   // 只在当前的.vue文件里生效
   data() {
-    return {
-    
-    };
-  }
+    return {};
+  },
 };
 </script>

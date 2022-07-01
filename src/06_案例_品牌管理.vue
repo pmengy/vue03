@@ -24,7 +24,7 @@
             <td>{{ item.id }}</td>
             <td>{{ item.name }}</td>
             <td :class="{ red: item.price > 100 }">{{ item.price }}</td>
-            <td>{{ item.time }}</td>
+            <td>{{ item.time | format }}</td>
             <td><a href="#" @click.prevent="del(item.id)">删除</a></td>
           </tr>
           <!-- <tr style="background-color: #EEE">
@@ -79,6 +79,8 @@
 // 3. 下载bootstrap, main.js引入bootstrap.css
 // 4. 把list数组 - 铺设表格
 // 5. 修改价格颜色
+import moment from 'moment';
+
 export default {
   data() {
     return {
@@ -113,6 +115,11 @@ export default {
       });
       this.name = '';
       this.price = 0;
+    },
+  },
+  filters: {
+    format(val) {
+      return moment(val).format('YYYY-MM-DD HH:mm:ss');
     },
   },
 };

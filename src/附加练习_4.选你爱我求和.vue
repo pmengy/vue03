@@ -25,7 +25,7 @@ export default {
   computed: {
     total() {
       return this.checkedNum.reduce((sum, val) => {
-        return (sum += val);
+        return sum + val;
       }, 0);
     },
   },

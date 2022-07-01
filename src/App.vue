@@ -2,17 +2,21 @@
   <div id="app" style="padding: 20px">
     <div>
       <span>姓名:</span>
-      <input type="text" v-model.trim="username" placeholder="请输入姓名" />
+      <input
+        type="text"
+        v-model.trim="info.username"
+        placeholder="请输入姓名"
+      />
     </div>
     <br />
     <div>
       <span>年龄:</span>
-      <input type="number" v-model.trim="age" placeholder="请输入年龄" />
+      <input type="number" v-model.trim="info.age" placeholder="请输入年龄" />
     </div>
     <br />
     <div>
       <span>性别:</span>
-      <select v-model="gender">
+      <select v-model="info.gender">
         <option value="1">男</option>
         <option value="0">女</option>
       </select>
@@ -63,16 +67,18 @@ export default {
           gender: 1,
         },
       ],
-      username: '',
-      age: '',
-      gender: '',
+      info: {
+        username: '',
+        age: '',
+        gender: '',
+      },
       flag: true,
       current: '',
     };
   },
   methods: {
     add() {
-      if (this.username === '' || this.age === '' || this.gender === '')
+      if (this.info.username === '' || this.info.age === '' || this.info.gender === '')
         return alert('请输入相关信息!');
       if (this.flag) {
         const newId = this.arr[this.arr.length - 1].id
@@ -80,25 +86,25 @@ export default {
           : 100;
         this.arr.push({
           id: newId,
-          username: this.username,
-          age: this.age,
-          gender: this.gender,
+          username: this.info.username,
+          age: this.info.age,
+          gender: this.info.gender,
         });
         this.flag = false;
       } else {
         const index = this.arr.findIndex((ele) => ele.id === this.current);
         this.arr.splice(index, 1, {
           id: this.current,
-          username: this.username,
-          age: this.age,
-          gender: this.gender,
+          username: this.info.username,
+          age: this.info.age,
+          gender: this.info.gender,
         });
         this.current = '';
         this.flag = true;
       }
-      this.username = '';
-      this.age = '';
-      this.gender = '';
+      this.info.username = '';
+      this.info.age = '';
+      this.info.gender = '';
     },
     del(id) {
       const index = this.arr.findIndex((ele) => ele.id === id);
@@ -106,9 +112,9 @@ export default {
     },
     edit(data) {
       this.flag = false;
-      this.username = data.username;
-      this.age = data.age;
-      this.gender = data.gender;
+      this.info.username = data.username;
+      this.info.age = data.age;
+      this.info.gender = data.gender;
       this.current = data.id;
     },
   },

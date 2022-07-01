@@ -1,19 +1,22 @@
 <template>
   <div>
-    <input type="text" v-model="user.name">
-    <input type="text" v-model="user.age">
+    <input type="text" v-model="user.name" />
+    <input type="text" v-model="user.age" />
   </div>
 </template>
 
 <script>
 export default {
-  data(){
+  data() {
     return {
       user: {
-        name: "",
-        age: 0
-      }
-    }
+        name: '',
+        age: '',
+        msg: {
+          a: 1,
+        },
+      },
+    };
   },
   // 目标: 侦听对象
   /*
@@ -31,10 +34,24 @@ export default {
       }
     }
   */
- 
-}
+  // watch: {
+  //   user: {
+  //     handler(newVal, oldVal) {
+  //       console.log(newVal, oldVal);
+  //     },
+  //     // deep: true,
+  //     // immediate: true,
+  //   },
+  // },
+  // 如果只是监听复杂数据类型里的某个简单数据类型的属性
+  watch: {
+    'user.name': {
+      handler(newVal, oldVal) {
+        console.log(newVal, oldVal);
+      },
+    },
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
