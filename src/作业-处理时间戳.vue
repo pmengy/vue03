@@ -20,7 +20,7 @@ export default {
 
   methods: {},
   filters: {
-    format(val,split) {
+    format(val, split) {
       return moment(val).format(`YYYY${split}MM${split}DD`);
     },
   },
